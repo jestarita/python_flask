@@ -1,0 +1,25 @@
+{%extends 'bootstrap/base.html' %}
+
+{%block head %}
+    {{super()}}
+{% endblock %}
+<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Aprendiendo flask | {% endblock %}</title>
+    <link href="{{ url_for('static', filename='css/styles.css' )}}" rel="stylesheet" />
+
+{% block body %}
+    {%block navbar %}
+        {% include 'rutas.html'%}
+     {% endblock %}
+     {%for message in get_flashed_messages() %}
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" data-dismiss="alert" class="close"> X</button>
+            {{ message }}
+        </div> 
+     {% endfor %}
+    {% block content %}
+    {% endblock %}
+    {% block scripts %} {{super()}} {% endblock %}
+{% endblock %}

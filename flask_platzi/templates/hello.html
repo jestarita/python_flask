@@ -1,0 +1,42 @@
+
+{% extends 'base.html' %}
+{% import 'macros.html' as macros %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %} 
+    {{super()}}
+    bienvenido 
+{% endblock %}
+
+{% block content %}
+    {% if username %}
+        <h1>Bienvenido {{username | capitalize }} </h1>
+    {% endif %}
+
+
+    {% if user_ip %}
+        <h2>Tu ip es {{user_ip}}</h2>
+    {% else %}
+
+        <h3>No hay ip Disponible</h3>
+
+        <a href="{{ url_for('index')}}">Volver</a>
+    {% endif %}
+
+    <div class="container">
+        <!-- <form action="{{ url_for('hola')}}" method="POST">
+            {{login_form.username}}
+            {{login_form.username.label}}
+            {{login_form.password}}
+            {{login_form.password.label}}
+        </form> -->
+
+        {{ wtf.quick_form(login_form) }}
+
+    </div>
+   <ul>
+        {% for item in listado %}
+            {{macros.recibir_fruta(loop.index, item)}}
+        {% endfor %}
+    </ul>
+{% endblock %}
